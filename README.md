@@ -110,7 +110,30 @@ docker compose exec db mysql --version
 
 Расширение **VisualEditor** при первом запуске автоматически клонируется в `mediawiki/extensions/VisualEditor` (нужен интернет).
 
+## Развёртывание на VPS
+
+В `.env` укажите публичный URL wiki (тот же хост и порт, что в `docker-compose.yml`):
+
+```bash
+MW_SERVER=http://ВАШ_IP:8080
+```
+
+После изменения `.env` пересоздайте контейнер `app` (обычный `restart` не подхватывает новые переменные):
+
+```bash
+docker compose up -d --force-recreate app
+```
+
 ## Частые проблемы
+
+**Connection refused на :8080** — порт не слушается, пока контейнер `app` не в статусе `Up`. Проверьте:
+
+```bash
+docker compose ps
+docker compose logs --tail=80 app
+```
+
+Если `app` в цикле `Restarting`, смотрите последние строки логов (частая причина — неполная папка `mediawiki/`, в том числе отсутствует `includes/cache/`). После исправления кода: `docker compose up -d --build`.
 
 **Порт 8080 занят** — в `docker-compose.yml` измените `"8080:80"` на другой порт, например `"8888:80"`, и укажите тот же URL в `.env`: `MW_SERVER=http://localhost:8888`.
 

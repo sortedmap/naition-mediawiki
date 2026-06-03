@@ -22,6 +22,13 @@ $wgEnableUploads = true;
 $wgUseImageMagick = false;
 $wgLanguageCode = '${MW_LANGUAGE}';
 
+# Skins (MW 1.24+ requires explicit wfLoadSkin; not autoloaded from skins/)
+wfLoadSkin( 'Vector' );
+wfLoadSkin( 'MonoBook' );
+wfLoadSkin( 'Modern' );
+wfLoadSkin( 'CologneBlue' );
+$wgDefaultSkin = 'vector';
+
 $wgRightsText = '';
 $wgRightsUrl = '';
 

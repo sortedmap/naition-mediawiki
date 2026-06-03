@@ -4,6 +4,7 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+      MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: ${MW_DB_NAME:-wikidb}
       MYSQL_USER: ${MW_DB_USER:-wikiuser}
       MYSQL_PASSWORD: ${MW_DB_PASSWORD:-wikipass}
