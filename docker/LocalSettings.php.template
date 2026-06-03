@@ -1,0 +1,57 @@
+<?php
+# Generated from LocalSettings.php.template — do not edit by hand in production.
+
+$wgSitename = '${MW_WIKI_NAME}';
+$wgMetaNamespace = 'Project';
+
+$wgServer = '${MW_SERVER}';
+$wgScriptPath = '${MW_SCRIPT_PATH}';
+$wgResourceBasePath = $wgScriptPath;
+
+$wgSecretKey = '${MW_SECRET_KEY}';
+
+$wgDBtype = 'mysql';
+$wgDBserver = '${MW_DB_SERVER}';
+$wgDBname = '${MW_DB_NAME}';
+$wgDBuser = '${MW_DB_USER}';
+$wgDBpassword = '${MW_DB_PASSWORD}';
+
+$wgMainCacheType = CACHE_NONE;
+$wgMemCachedServers = array();
+$wgEnableUploads = true;
+$wgUseImageMagick = false;
+$wgLanguageCode = '${MW_LANGUAGE}';
+
+$wgRightsText = '';
+$wgRightsUrl = '';
+
+# VisualEditor + Parsoid (MediaWiki 1.26)
+$wgSessionsInObjectCache = true;
+
+wfLoadExtension( 'WikiEditor' );
+wfLoadExtension( 'VisualEditor' );
+wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'Cite' );
+wfLoadExtension( 'ConfirmEdit' );
+wfLoadExtension( 'Interwiki' );
+wfLoadExtension( 'Nuke' );
+wfLoadExtension( 'Renameuser' );
+wfLoadExtension( 'Gadgets' );
+wfLoadExtension( 'ImageMap' );
+wfLoadExtension( 'InputBox' );
+wfLoadExtension( 'Poem' );
+wfLoadExtension( 'SyntaxHighlight_GeSHi' );
+wfLoadExtension( 'TitleBlacklist' );
+wfLoadExtension( 'SpamBlacklist' );
+wfLoadExtension( 'CiteThisPage' );
+
+$wgGroupPermissions['user']['writeapi'] = true;
+
+$wgDefaultUserOptions['visualeditor-enable'] = 1;
+$wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
+
+$wgVirtualRestConfig['modules']['parsoid'] = array(
+	'url' => '${PARSOID_URL}',
+	'domain' => '${PARSOID_DOMAIN}',
+	'prefix' => '${PARSOID_PREFIX}',
+);

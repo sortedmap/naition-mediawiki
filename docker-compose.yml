@@ -1,0 +1,66 @@
+services:
+  db:
+    image: mysql:5.7.42
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${MW_DB_NAME:-wikidb}
+      MYSQL_USER: ${MW_DB_USER:-wikiuser}
+      MYSQL_PASSWORD: ${MW_DB_PASSWORD:-wikipass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-rootpass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    ports:
+      - "8080:80"
+    volumes:
+      - ./mediawiki:/var/www/html
+    environment:
+      MW_DB_SERVER: db
+      MW_DB_NAME: ${MW_DB_NAME:-wikidb}
+      MW_DB_USER: ${MW_DB_USER:-wikiuser}
+      MW_DB_PASSWORD: ${MW_DB_PASSWORD:-wikipass}
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+      MW_SERVER: ${MW_SERVER:-http://localhost:8080}
+      MW_SCRIPT_PATH: ${MW_SCRIPT_PATH:-}
+      MW_WIKI_NAME: ${MW_WIKI_NAME:-MediaWiki}
+      MW_LANGUAGE: ${MW_LANGUAGE:-en}
+      MW_SECRET_KEY: ${MW_SECRET_KEY:-}
+      MW_ADMIN_USER: ${MW_ADMIN_USER:-admin}
+      MW_ADMIN_PASS: ${MW_ADMIN_PASS:-adminpass}
+      PARSOID_URL: ${PARSOID_URL:-http://parsoid:8142}
+      PARSOID_DOMAIN: ${PARSOID_DOMAIN:-localhost}
+      PARSOID_PREFIX: ${PARSOID_PREFIX:-localhost}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  parsoid:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.parsoid
+    platform: linux/amd64
+    environment:
+      PARSOID_MW_API_URL: ${PARSOID_MW_API_URL:-http://app/api.php}
+      PARSOID_DOMAIN: ${PARSOID_DOMAIN:-localhost}
+      PARSOID_PREFIX: ${PARSOID_PREFIX:-localhost}
+    depends_on:
+      - app
+    expose:
+      - "8142"
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

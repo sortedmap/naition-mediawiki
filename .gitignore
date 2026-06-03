@@ -1,0 +1,21 @@
+# Локальные секреты
+.env
+
+# Сгенерированная конфигурация MediaWiki
+mediawiki/LocalSettings.php
+mediawiki/LocalSettings.php5
+
+# Рантайм (кэш и загрузки)
+mediawiki/cache/*
+!mediawiki/cache/.htaccess
+mediawiki/images/*
+!mediawiki/images/.htaccess
+mediawiki/thumb/
+mediawiki/tmp/
+
+# ОС и IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~

@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+!.env.example
+docker-compose.override.yml
+prepare.sh
+mediawiki/cache/*
+!mediawiki/cache/.htaccess
+mediawiki/images/*
+!mediawiki/images/.htaccess
+mediawiki/LocalSettings.php
+mediawiki/thumb/
+mediawiki/tmp/

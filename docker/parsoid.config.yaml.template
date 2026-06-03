@@ -1,0 +1,13 @@
+# Parsoid config — generated at container start (v0.7.1 format)
+worker_heartbeat_timeout: 300000
+
+logging:
+  level: warn
+
+services:
+  - module: lib/index.js
+    entrypoint: apiServiceWorker
+    conf:
+      mwApis:
+        - uri: '${PARSOID_MW_API_URL}'
+          domain: '${PARSOID_DOMAIN}'
