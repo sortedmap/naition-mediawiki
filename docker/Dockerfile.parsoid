@@ -1,16 +1,25 @@
-FROM node:8-stretch
+FROM node:10-stretch
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+        -e 's/security.debian.org/archive.debian.org/g' \
+        /etc/apt/sources.list \
+    && sed -i '/stretch-updates/d' /etc/apt/sources.list \
+    && printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated --no-install-recommends \
     git \
     curl \
     gettext-base \
+    python \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 
-RUN git clone --depth 1 --branch v0.7.1 \
-        https://github.com/wikimedia/mediawiki-services-parsoid.git parsoid \
+RUN git clone https://github.com/wikimedia/mediawiki-services-parsoid.git parsoid \
     && cd parsoid \
+    && git checkout v0.7.1 \
+    && npm config set unsafe-perm true \
     && npm install --production
 
 COPY docker/parsoid.config.yaml.template /docker/parsoid.config.yaml.template

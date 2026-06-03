@@ -1,6 +1,13 @@
 FROM php:5.6.40-fpm
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Debian Stretch (EOL): официальные зеркала отдают 404, используем archive.debian.org
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+        -e 's/security.debian.org/archive.debian.org/g' \
+        /etc/apt/sources.list \
+    && sed -i '/stretch-updates/d' /etc/apt/sources.list \
+    && printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated --no-install-recommends \
     nginx \
     gettext-base \
     git \
@@ -15,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libkrb5-dev \
     libzip-dev \
     libreadline-dev \
+    libedit-dev \
     mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
@@ -22,7 +30,7 @@ RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
         --with-png-dir=/usr/include/ \
-    && docker-php-ext-configure imap --with-imap-ssl --with-imap \
+    && docker-php-ext-configure imap --with-imap-ssl --with-imap --with-kerberos \
     && docker-php-ext-install -j"$(nproc)" \
         gd \
         mysqli \

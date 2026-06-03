@@ -39,7 +39,7 @@ services:
       MW_SECRET_KEY: ${MW_SECRET_KEY:-}
       MW_ADMIN_USER: ${MW_ADMIN_USER:-admin}
       MW_ADMIN_PASS: ${MW_ADMIN_PASS:-adminpass}
-      PARSOID_URL: ${PARSOID_URL:-http://parsoid:8142}
+      PARSOID_URL: ${PARSOID_URL:-http://parsoid:8000}
       PARSOID_DOMAIN: ${PARSOID_DOMAIN:-localhost}
       PARSOID_PREFIX: ${PARSOID_PREFIX:-localhost}
     depends_on:
@@ -48,18 +48,14 @@ services:
     restart: unless-stopped
 
   parsoid:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.parsoid
+    image: thenets/parsoid:0.8
     platform: linux/amd64
     environment:
-      PARSOID_MW_API_URL: ${PARSOID_MW_API_URL:-http://app/api.php}
-      PARSOID_DOMAIN: ${PARSOID_DOMAIN:-localhost}
-      PARSOID_PREFIX: ${PARSOID_PREFIX:-localhost}
+      PARSOID_DOMAIN_localhost: ${PARSOID_MW_API_URL:-http://app/api.php}
     depends_on:
       - app
     expose:
-      - "8142"
+      - "8000"
     restart: unless-stopped
 
 volumes:
