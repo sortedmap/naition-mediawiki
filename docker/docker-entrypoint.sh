@@ -24,6 +24,10 @@ ensure_mediawiki_core() {
         echo "ERROR: missing includes/cache/ — incomplete MediaWiki tree in mediawiki/" >&2
         exit 1
     fi
+    if [ ! -f resources/lib/oojs-ui/themes/mediawiki/images/icons/add.svg ]; then
+        echo "ERROR: missing oojs-ui theme images (resources/lib/oojs-ui/themes/mediawiki/images/) — incomplete MediaWiki tree" >&2
+        exit 1
+    fi
 }
 
 ensure_runtime_dirs() {
