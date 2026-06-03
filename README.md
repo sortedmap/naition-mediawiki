@@ -1,6 +1,6 @@
 # MediaWiki — локальный запуск в Docker
 
-Учебный проект: **MediaWiki 1.26.3** с **VisualEditor**, PHP 5.6.40, Nginx, MySQL 5.7.42, Parsoid.
+Проект: **MediaWiki 1.26.3** с **VisualEditor**, PHP 5.6.40, Nginx, MySQL 5.7.42, Parsoid.
 
 ## Требования
 
@@ -117,7 +117,3 @@ docker compose exec db mysql --version
 **Apple Silicon (M1/M2)** — в compose указано `platform: linux/amd64`; первый запуск может быть медленнее.
 
 **Ошибка Parsoid / VisualEditor** — дождитесь полного старта: `docker compose ps` (все сервисы `running`), затем обновите страницу. Проверьте логи: `docker compose logs parsoid`.
-
-## Для преподавателя
-
-Скрипт `prepare.sh` обновляет `mediawiki/` из родительского репозитория курса (если вы ведёте разработку в монорепозитории). Ученикам он не нужен.
