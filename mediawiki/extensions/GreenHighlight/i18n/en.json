@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"greenhighlight-desc": "Adds a button to the VisualEditor text style menu that highlights the selected text in green",
+	"greenhighlight-visualeditor-annotationbutton-tooltip": "Green highlight"
+}

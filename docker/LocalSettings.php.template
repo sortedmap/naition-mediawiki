@@ -51,6 +51,7 @@ wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TitleBlacklist' );
 wfLoadExtension( 'SpamBlacklist' );
 wfLoadExtension( 'CiteThisPage' );
+wfLoadExtension( 'GreenHighlight' );
 
 $wgGroupPermissions['user']['writeapi'] = true;
 

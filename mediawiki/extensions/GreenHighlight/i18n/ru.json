@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"greenhighlight-desc": "Добавляет в меню стилей текста визуального редактора кнопку выделения текста зелёным цветом",
+	"greenhighlight-visualeditor-annotationbutton-tooltip": "Выделить зелёным"
+}

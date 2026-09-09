@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"greenhighlight-desc": "{{desc|name=GreenHighlight|url=https://www.mediawiki.org/wiki/Extension:GreenHighlight}}",
+	"greenhighlight-visualeditor-annotationbutton-tooltip": "Tooltip of the VisualEditor toolbar button that highlights the selected text in green.\n{{Identical|Green highlight}}"
+}
