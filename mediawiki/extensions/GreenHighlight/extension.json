@@ -1,0 +1,76 @@
+{
+	"name": "GreenHighlight",
+	"version": "1.0.0",
+	"license-name": "GPL-2.0+",
+	"descriptionmsg": "greenhighlight-desc",
+	"type": "editor",
+	"MessagesDirs": {
+		"GreenHighlight": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"GreenHighlightHooks": "GreenHighlight.hooks.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"GreenHighlightHooks::onBeforePageDisplay"
+		],
+		"ResourceLoaderTestModules": [
+			"GreenHighlightHooks::onResourceLoaderTestModules"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "GreenHighlight/modules"
+	},
+	"ResourceModules": {
+		"ext.greenHighlight": {
+			"position": "top",
+			"styles": [
+				"ext.greenHighlight.css"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.greenHighlight.icons": {
+			"class": "ResourceLoaderImageModule",
+			"position": "top",
+			"prefix": "oo-ui-icon",
+			"images": {
+				"greenHighlight": {
+					"file": "ve-greenhighlight/icons/green-highlight.svg"
+				}
+			},
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.greenHighlight.visualEditor": {
+			"scripts": [
+				"ve-greenhighlight/ve.dm.MWGreenHighlightAnnotation.js",
+				"ve-greenhighlight/ve.ce.MWGreenHighlightAnnotation.js",
+				"ve-greenhighlight/ve.ui.MWGreenHighlightAnnotationTool.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.mwcore",
+				"ext.greenHighlight",
+				"ext.greenHighlight.icons"
+			],
+			"messages": [
+				"greenhighlight-visualeditor-annotationbutton-tooltip"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"VisualEditorPluginModules": [
+		"ext.greenHighlight.visualEditor"
+	],
+	"manifest_version": 1
+}

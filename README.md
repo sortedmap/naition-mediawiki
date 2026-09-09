@@ -110,6 +110,10 @@ docker compose exec db mysql --version
 
 Расширение **VisualEditor** при первом запуске автоматически клонируется в `mediawiki/extensions/VisualEditor` (нужен интернет).
 
+### Выделение текста зелёным
+
+Расширение `mediawiki/extensions/GreenHighlight` добавляет в меню стилей текста визуального редактора (там же, где полужирный и курсив) кнопку «Выделить зелёным». Выделенный текст сохраняется в вики-разметке как `<span class="mw-green-highlight">…</span>`; цвет задаётся в `mediawiki/extensions/GreenHighlight/modules/ext.greenHighlight.css`.
+
 ## Развёртывание на VPS
 
 В `.env` укажите публичный URL wiki (тот же хост и порт, что в `docker-compose.yml`):

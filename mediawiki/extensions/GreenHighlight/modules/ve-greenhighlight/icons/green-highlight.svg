@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The "A" glyph is taken from the OOjs UI text-style icon (MIT licensed). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g id="green-highlight">
+        <path id="a" d="M15.296 18h2.79l-1.14-12h-2.79L6 18h2.79l2.038-3h4.183l.29 3zm-3.11-5L14.5 9.6l.323 3.4H12.19z"/>
+        <rect id="highlight" x="6" y="19" width="12" height="3" rx="1" fill="#00af89"/>
+    </g>
+</svg>
